@@ -1,0 +1,63 @@
+import kivy
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty
+
+class MojeGridy(Widget):
+    imie = ObjectProperty(None)
+    email = ObjectProperty(None)
+    phone=ObjectProperty(None)
+    
+    def cos(self):
+        print(self.imie.text,"   ", self.email.text)
+        self.imie.text = ""
+        self.email.text = ""
+
+
+class AplikacjaApp(App):
+    def build(self):
+        return MojeGridy()
+
+if __name__ == "__main__":
+    AplikacjaApp().run()
+
+#aplikacja.kv
+
+<MojeGridy>
+	
+	imie: name
+	email: Email
+	phone: nr_tel
+
+	GridLayout:
+		cols:1
+		size: root.width, root.height
+
+		GridLayout:
+			cols:2
+			
+			Label:
+				text: "imie"
+
+			TextInput:
+				id: name
+				multiname: False
+
+			Label:
+				text: "Email: "
+
+			TextInput:
+				id: Email
+				multiname: False
+			Label:
+				id:nr_tel
+				text: "nr_tel: "
+
+			TextInput:
+				multiname: False
+		Button:
+			text:"Dodaj"
+			on_press:root.cos()
